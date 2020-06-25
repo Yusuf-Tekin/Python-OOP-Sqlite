@@ -14,7 +14,7 @@ class girisExam:
     def tablo_yarat(self):
         self.cursor.execute("CREATE TABLE IF NOT EXISTS users (username,password)")# IF NOT EXISTS DEMEK EĞER TABLO YOKSA OLUŞTUR DEMEK TERMİNALDE Kİ HATAYI YOK ETMEK MAKSAT
 
-    def addUser(self,username,password):
+    def kullaniciEkle(self,username,password):
         adddata = self.cursor.execute("INSERT INTO users VALUES ('" + username + "','" +password + "')")
         if(adddata):
             print('Kayıt Başarılı')
@@ -25,7 +25,7 @@ class girisExam:
     def dataInput(self):
         Username = input('Username => ')
         Password = input('Password => ')
-        self.addUser(Username,Password)
+        self.kullaniciEkle(Username,Password)
 
     def girisKontrol(self,Username,Password):
         self.cursor.execute("SELECT * FROM users")
@@ -51,7 +51,7 @@ class girisExam:
         getPassword = input('Parola:')
         self.girisKontrol(getUsername,getPassword)
 
-    def del_acc(self):
+    def kullaniciSil(self):
         print('Hesabı Silebilmek için kullanıcı adı ve parola girin')
         username = input('Kullanıcı Adı : ')
         password = input('Şifre:')
@@ -59,13 +59,13 @@ class girisExam:
         data = self.cursor.fetchall()
         for i in data:
             if (i[0] == username and i[1] == password):
-                self.hesabımıSil(i[0],i[1])
+                self.hesapSil(i[0],i[1])
                 break
             else:
                 print('Hesap Bulunamadı')
 
 
-    def hesabımıSil(self,Username,Password):
+    def hesapSil(self,Username,Password):
         print('Silinen Hesap Adı : ' + Username)
         print('Silinen Hesap Şifre : ' + Password)
         delete = self.cursor.execute('DELETE FROM users WHERE username =  "' +Username+ '"')
@@ -76,4 +76,4 @@ class girisExam:
             print('Hesabınız Silinemedi')
 
 yeni = girisExam()
-yeni.del_acc()
+"""Kullanmak istediğin fonksiyon kodları..."""
